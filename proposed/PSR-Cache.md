@@ -1,6 +1,6 @@
 ## Introduction
 
-Caching is a common way to improve the performance of any project, making caching libraries one of the most common features of many frameworks and libraries. This has lead to a situation where many libraries roll their own caching libraries, with various levels of functionality, causing developers to have to learn multiple systems which may or may not provide the functionality they need. In addition, the developers of caching libraries themselves face a choice between only supporting a limited number of frameworks or creating a large number of adapter classes.
+Caching is a common way to improve the performance of any project, thus making caching libraries one of the most common features of many frameworks and libraries. This has lead to a situation where many libraries roll their own caching libraries, with various levels of functionality. These differences are causing developers to have to learn multiple systems which may or may not provide the functionality they need. In addition, the developers of caching libraries themselves face a choice between only supporting a limited number of frameworks or creating a large number of adapter classes.
 
 A common interface for caching systems will solve these problems. Library and framework developers can count on the caching systems working the way they're expecting, while the developers of caching systems will only have to implement a single set of interfaces rather than a whole assortment of adapters.
 
@@ -83,7 +83,7 @@ interface Pool
      * Bulk lookups can often by steamlined by backend cache systems. The
      * returned iterator will contain a Cache\Item for each key passed.
      *
-     * @param array $key
+     * @param array $keys
      * @return \Iterator
      */
     function getCacheIterator($keys);
@@ -189,7 +189,7 @@ interface Item
 
 ## Extensions
 
-Extensions are optional which do not need to be implemented by the Implementing Library but which may provide useful functionality or insights. Calling Libraries should not rely on any of the functionality below, but can use any relevant interfaces. These extensions primarily exist to show how the existing standard can be extending by interested developers while still meeting the guidelines of this standard.
+Extensions are optional features which do not need to be implemented by the Implementing Library but which may provide useful functionality or insights. Calling Libraries should not rely on any of the functionality below, but can use any relevant interfaces. These extensions primarily exist to show how the existing standard can be extended by interested developers while still meeting the guidelines.
 
 
 ### Namespaces
@@ -268,7 +268,7 @@ interface TaggablePool extends \PSR\Cache\Pool
     /**
      * Clears the cache of all items with the specified tag.
      *
-     * @param string
+     * @param string $tag
      * @return bool
      */
     function clearByTag($tag);
@@ -298,6 +298,7 @@ interface TaggableItem extends \PSR\Cache\Item
      * will cause all tags to be removed. Changes to an Item's tags are not
      * guaranteed to persist unless the "set" function is called.
      *
+     * @param array $tags
      * @return void
      */
     function setTags(array $tags = array());
